@@ -110,7 +110,9 @@ func main() {
 
 		// Stock endpoints
 		v1.POST("/stock/receive", stockHandler.Receive)
+		v1.POST("/stock/transfer", stockHandler.Transfer)
 		v1.GET("/stock/:item_id", stockHandler.GetByItemID)
+		v1.GET("/stock/:item_id/logs", stockHandler.GetLogsByItemID)
 
 		// Location endpoints (bonus)
 		v1.GET("/locations", locationHandler.List)

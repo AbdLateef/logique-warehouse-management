@@ -31,10 +31,31 @@ type ReceiveStockRequest struct {
 	Qty        int    `json:"qty" binding:"required"`
 }
 
+type TransferStockRequest struct {
+	ItemID         string `json:"item_id" binding:"required"`
+	FromLocationID string `json:"from_location_id" binding:"required"`
+	ToLocationID   string `json:"to_location_id" binding:"required"`
+	Qty            int    `json:"qty" binding:"required"`
+}
+
 type StockMutationLog struct {
 	ID           string    `json:"id" db:"id"`
 	ItemID       string    `json:"item_id" db:"item_id"`
 	LocationID   string    `json:"location_id" db:"location_id"`
+	Type         string    `json:"type" db:"type"`
+	QtyChange    int       `json:"qty_change" db:"qty_change"`
+	BalanceAfter int       `json:"balance_after" db:"balance_after"`
+	CreatedAt    time.Time `json:"created_at" db:"created_at"`
+}
+
+type StockMutationLogDetail struct {
+	ID           string    `json:"id" db:"id"`
+	ItemID       string    `json:"item_id" db:"item_id"`
+	ItemSKU      string    `json:"item_sku" db:"item_sku"`
+	ItemName     string    `json:"item_name" db:"item_name"`
+	LocationID   string    `json:"location_id" db:"location_id"`
+	LocationCode string    `json:"location_code" db:"location_code"`
+	Zone         string    `json:"zone" db:"zone"`
 	Type         string    `json:"type" db:"type"`
 	QtyChange    int       `json:"qty_change" db:"qty_change"`
 	BalanceAfter int       `json:"balance_after" db:"balance_after"`

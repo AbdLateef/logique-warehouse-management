@@ -4,6 +4,7 @@ import { Navbar } from './components/Navbar'
 import { ToastProvider } from './context/ToastContext'
 import { DashboardPage } from './pages/DashboardPage'
 import { ItemFormPage } from './pages/ItemFormPage'
+import { StockManagePage } from './pages/StockManagePage'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,6 +27,7 @@ export default function App() {
                 <Route path="/" element={<DashboardPage />} />
                 <Route path="/items/new" element={<ItemFormPage />} />
                 <Route path="/items/edit/:id" element={<ItemFormPage />} />
+                <Route path="/items/:id/stock" element={<StockManagePage />} />
               </Routes>
             </main>
           </div>

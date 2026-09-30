@@ -161,6 +161,24 @@ paths:
         '404':
           description: Item or Location not found
 
+  /api/v1/stock/transfer:
+    post:
+      summary: Transfer stock between warehouse locations
+      operationId: transferStock
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferStockRequest'
+      responses:
+        '200':
+          description: Stock transferred successfully
+        '400':
+          description: Invalid quantity, same source/destination, or insufficient stock
+        '404':
+          description: Item or Location not found
+
   /api/v1/stock/{item_id}:
     get:
       summary: Get stock details per location for an item
@@ -174,6 +192,20 @@ paths:
       responses:
         '200':
           description: Stock list per location
+
+  /api/v1/stock/{item_id}/logs:
+    get:
+      summary: Get stock mutation logs history for an item
+      operationId: getStockLogsByItemId
+      parameters:
+        - name: item_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Stock mutation logs history
 
   /api/v1/locations:
     get:
@@ -221,6 +253,26 @@ components:
         qty:
           type: integer
           example: 50
+    TransferStockRequest:
+      type: object
+      required:
+        - item_id
+        - from_location_id
+        - to_location_id
+        - qty
+      properties:
+        item_id:
+          type: string
+          example: "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+        from_location_id:
+          type: string
+          example: "a11ac10b-58cc-4372-a567-0e02b2c3d999"
+        to_location_id:
+          type: string
+          example: "b22bc20c-58cc-4372-a567-0e02b2c3d888"
+        qty:
+          type: integer
+          example: 10
     SuccessResponseItem:
       type: object
       properties:

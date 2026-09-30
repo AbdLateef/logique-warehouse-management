@@ -20,7 +20,6 @@ import {
 import { useItems, useCategories, useLocations, useDeleteItem, useDebounce, useToast } from '../hooks'
 import { Item } from '../types'
 import { CardSkeleton, TableRowSkeleton } from '../components/Skeleton'
-import { StockReceiveModal } from '../components/StockReceiveModal'
 
 export const DashboardPage: FC = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -30,7 +29,6 @@ export const DashboardPage: FC = () => {
 
   const debouncedSearch = useDebounce(searchTerm, 300)
 
-  const [selectedItemForStock, setSelectedItemForStock] = useState<Item | null>(null)
   const [itemToDelete, setItemToDelete] = useState<Item | null>(null)
 
   const { data: itemsResponse, isLoading: isLoadingItems, isError: isErrorItems, error: itemsError, isRefetching, refetch } = useItems({
@@ -295,13 +293,13 @@ export const DashboardPage: FC = () => {
                       {/* Action column: Stock, Edit, Delete always visible */}
                       <td className="py-3.5 px-4">
                         <div className="flex items-center justify-end gap-1.5">
-                          <button
-                            onClick={() => setSelectedItemForStock(item)}
+                          <Link
+                            to={`/items/${item.id}/stock`}
                             className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-[11px] font-bold text-slate-950 bg-logique-yellow hover:bg-logique-hover rounded-lg transition focus:outline-none focus:ring-2 focus:ring-logique-yellow/50 whitespace-nowrap"
                           >
                             <PackageIcon size={13} weight="bold" />
                             <span>Kelola Stok</span>
-                          </button>
+                          </Link>
                           <Link
                             to={`/items/edit/${item.id}`}
                             className="p-1.5 text-slate-400 hover:text-logique-yellow bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-logique-yellow/40"
@@ -358,13 +356,6 @@ export const DashboardPage: FC = () => {
           </div>
         )}
       </div>
-
-      {/* Stock Receive Modal */}
-      <StockReceiveModal
-        isOpen={!!selectedItemForStock}
-        item={selectedItemForStock}
-        onClose={() => setSelectedItemForStock(null)}
-      />
 
       {/* Delete Confirmation Modal */}
       {itemToDelete && (
