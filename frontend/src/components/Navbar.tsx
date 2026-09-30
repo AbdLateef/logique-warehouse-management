@@ -1,8 +1,8 @@
-import React from 'react'
+import { FC } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Package, PlusCircle, BookOpen, Warehouse } from 'lucide-react'
 
-export const Navbar: React.FC = () => {
+export const Navbar: FC = () => {
   const location = useLocation()
 
   return (
@@ -40,11 +40,10 @@ export const Navbar: React.FC = () => {
             {/* Navigation Buttons */}
             <Link
               to="/"
-              className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition ${
-                location.pathname === '/'
+              className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition ${location.pathname === '/'
                   ? 'bg-slate-800 text-logique-yellow border border-slate-700'
                   : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
-              }`}
+                }`}
             >
               <Package className="w-4 h-4" />
               <span>Dashboard</span>
@@ -55,7 +54,7 @@ export const Navbar: React.FC = () => {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-logique-yellow text-slate-950 text-xs font-bold hover:bg-logique-hover transition shadow-md hover:shadow-logique-yellow/20"
             >
               <PlusCircle className="w-4 h-4" />
-              <span>+ Tambah Item</span>
+              <span>Tambah Item</span>
             </Link>
           </div>
         </div>
