@@ -33,7 +33,7 @@ export const DashboardPage: FC = () => {
   const [selectedItemForStock, setSelectedItemForStock] = useState<Item | null>(null)
   const [itemToDelete, setItemToDelete] = useState<Item | null>(null)
 
-  const { data: itemsResponse, isLoading: isLoadingItems, isRefetching, refetch } = useItems({
+  const { data: itemsResponse, isLoading: isLoadingItems, isError: isErrorItems, error: itemsError, isRefetching, refetch } = useItems({
     page,
     limit,
     search: debouncedSearch || undefined,
@@ -69,12 +69,7 @@ export const DashboardPage: FC = () => {
   return (
     <div className="space-y-8 pb-12">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-5 border-b border-slate-800/80">
-        <div>
-          <p className="text-xs font-semibold tracking-widest text-slate-500 uppercase mb-1">Warehouse Management</p>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-100 tracking-tight">Inventaris Item</h1>
-          <p className="text-sm text-slate-400 mt-1">Lacak stok, terima barang, dan kelola item gudang.</p>
-        </div>
+      <div className="flex justify-end gap-4 pb-5 border-b border-slate-800/80">
         <Link
           to="/items/new"
           className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-logique-yellow text-slate-950 font-bold text-sm rounded-xl hover:bg-logique-hover transition-all shadow-lg focus:outline-none focus:ring-2 focus:ring-logique-yellow/50"
@@ -217,6 +212,27 @@ export const DashboardPage: FC = () => {
             <tbody className="divide-y divide-slate-800/50 text-sm">
               {isLoadingItems ? (
                 Array.from({ length: 5 }).map((_, i) => <TableRowSkeleton key={i} />)
+              ) : isErrorItems ? (
+                <tr>
+                  <td colSpan={7} className="py-16 text-center">
+                    <div className="flex flex-col items-center gap-3">
+                      <div className="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400">
+                        <WarningOctagonIcon size={28} weight="duotone" />
+                      </div>
+                      <p className="font-semibold text-rose-400">Gagal Memuat Data Item</p>
+                      <p className="text-xs text-slate-400 max-w-xs">
+                        {(itemsError as any)?.message || 'Terjadi kesalahan koneksi server.'}
+                      </p>
+                      <button
+                        onClick={() => refetch()}
+                        className="mt-1 inline-flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-xl border border-slate-700 transition"
+                      >
+                        <ArrowClockwiseIcon size={14} weight="bold" />
+                        <span>Coba Lagi</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
               ) : items.length === 0 ? (
                 <tr>
                   <td colSpan={7} className="py-16 text-center">
@@ -276,7 +292,7 @@ export const DashboardPage: FC = () => {
                           </span>
                         )}
                       </td>
-                      {/* Action column: Stock button always visible, Edit+Delete appear on hover */}
+                      {/* Action column: Stock, Edit, Delete always visible */}
                       <td className="py-3.5 px-4">
                         <div className="flex items-center justify-end gap-1.5">
                           <button
@@ -288,14 +304,14 @@ export const DashboardPage: FC = () => {
                           </button>
                           <Link
                             to={`/items/edit/${item.id}`}
-                            className="p-1.5 text-slate-600 hover:text-logique-yellow hover:bg-slate-800 rounded-lg border border-transparent hover:border-slate-700 transition opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-logique-yellow/40"
+                            className="p-1.5 text-slate-400 hover:text-logique-yellow bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-logique-yellow/40"
                             title="Edit item"
                           >
                             <PencilSimpleIcon size={14} weight="bold" />
                           </Link>
                           <button
                             onClick={() => setItemToDelete(item)}
-                            className="p-1.5 text-slate-600 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg border border-transparent hover:border-rose-500/20 transition opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-rose-500/30"
+                            className="p-1.5 text-slate-400 hover:text-rose-400 bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 hover:border-rose-500/30 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-rose-500/30"
                             title="Hapus item"
                           >
                             <TrashIcon size={14} weight="bold" />

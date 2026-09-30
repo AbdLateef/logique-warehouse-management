@@ -2,7 +2,6 @@ import { FC } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import {
   PackageIcon,
-  PlusCircleIcon,
   BooksIcon,
   WarehouseIcon,
 } from '@phosphor-icons/react'
@@ -22,9 +21,8 @@ export const Navbar: FC = () => {
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-xl font-extrabold text-logique-yellow tracking-wider">LOGIQUE</span>
-                <span className="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-medium border border-slate-700">WMS</span>
               </div>
-              <p className="text-xs text-slate-400 font-medium">Warehouse Item Management</p>
+              <p className="text-xs text-slate-400 font-medium">Warehouse Management System</p>
             </div>
           </Link>
 
@@ -46,21 +44,14 @@ export const Navbar: FC = () => {
             <Link
               to="/"
               className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition ${location.pathname === '/'
-                  ? 'bg-slate-800 text-logique-yellow border border-slate-700'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                ? 'bg-slate-800 text-logique-yellow border border-slate-700'
+                : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
                 }`}
             >
               <PackageIcon size={16} weight={location.pathname === '/' ? 'fill' : 'regular'} />
               <span>Dashboard</span>
             </Link>
 
-            <Link
-              to="/items/new"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-logique-yellow text-slate-950 text-xs font-bold hover:bg-logique-hover transition shadow-md hover:shadow-logique-yellow/20"
-            >
-              <PlusCircleIcon size={16} weight="bold" />
-              <span>Tambah Item</span>
-            </Link>
           </div>
         </div>
       </div>

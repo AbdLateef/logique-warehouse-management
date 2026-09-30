@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Navbar } from './components/Navbar'
 import { ToastProvider } from './context/ToastContext'
 import { DashboardPage } from './pages/DashboardPage'
+import { ItemFormPage } from './pages/ItemFormPage'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,28 +24,8 @@ export default function App() {
             <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
               <Routes>
                 <Route path="/" element={<DashboardPage />} />
-                <Route
-                  path="/items/new"
-                  element={
-                    <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
-                      <div className="bg-logique-card p-8 rounded-2xl border border-slate-700/60 max-w-md w-full shadow-2xl">
-                        <h2 className="text-2xl font-bold text-logique-yellow mb-2">Form Tambah Item Baru</h2>
-                        <p className="text-slate-400 text-sm">Halaman Route /items/new Siap Dibuat (Step E)</p>
-                      </div>
-                    </div>
-                  }
-                />
-                <Route
-                  path="/items/edit/:id"
-                  element={
-                    <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
-                      <div className="bg-logique-card p-8 rounded-2xl border border-slate-700/60 max-w-md w-full shadow-2xl">
-                        <h2 className="text-2xl font-bold text-logique-yellow mb-2">Form Edit Item</h2>
-                        <p className="text-slate-400 text-sm">Halaman Route /items/edit/:id Siap Dibuat (Step E)</p>
-                      </div>
-                    </div>
-                  }
-                />
+                <Route path="/items/new" element={<ItemFormPage />} />
+                <Route path="/items/edit/:id" element={<ItemFormPage />} />
               </Routes>
             </main>
           </div>
