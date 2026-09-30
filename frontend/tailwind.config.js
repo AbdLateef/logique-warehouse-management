@@ -7,12 +7,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          500: '#0284c7',
-          600: '#0284c7',
-          700: '#0369a1',
+        logique: {
+          yellow: '#FFD100',
+          hover: '#E6BC00',
+          navy: '#0B132B',
+          card: '#162238',
+          border: 'rgba(51, 65, 85, 0.6)',
         }
       }
     },
