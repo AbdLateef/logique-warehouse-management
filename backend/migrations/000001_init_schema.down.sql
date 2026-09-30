@@ -1,0 +1,4 @@
+DROP TABLE IF EXISTS stock_mutation_logs;
+DROP TABLE IF EXISTS stocks;
+DROP TABLE IF EXISTS locations;
+DROP TABLE IF EXISTS items;
