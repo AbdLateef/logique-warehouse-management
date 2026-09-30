@@ -1,6 +1,11 @@
 import { FC } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Package, PlusCircle, BookOpen, Warehouse } from 'lucide-react'
+import {
+  PackageIcon,
+  PlusCircleIcon,
+  BooksIcon,
+  WarehouseIcon,
+} from '@phosphor-icons/react'
 
 export const Navbar: FC = () => {
   const location = useLocation()
@@ -12,7 +17,7 @@ export const Navbar: FC = () => {
           {/* Brand Logo & Title */}
           <Link to="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 rounded-lg bg-logique-yellow/10 border border-logique-yellow/30 flex items-center justify-center text-logique-yellow group-hover:bg-logique-yellow group-hover:text-slate-950 transition-all duration-200">
-              <Warehouse className="w-5 h-5" />
+              <WarehouseIcon size={20} weight="duotone" />
             </div>
             <div>
               <div className="flex items-center gap-2">
@@ -33,7 +38,7 @@ export const Navbar: FC = () => {
               className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-logique-yellow bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 rounded-lg transition"
               title="Open OpenAPI Swagger Documentation"
             >
-              <BookOpen className="w-4 h-4 text-logique-yellow" />
+              <BooksIcon size={16} weight="duotone" className="text-logique-yellow" />
               <span>API Docs</span>
             </a>
 
@@ -45,7 +50,7 @@ export const Navbar: FC = () => {
                   : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
                 }`}
             >
-              <Package className="w-4 h-4" />
+              <PackageIcon size={16} weight={location.pathname === '/' ? 'fill' : 'regular'} />
               <span>Dashboard</span>
             </Link>
 
@@ -53,7 +58,7 @@ export const Navbar: FC = () => {
               to="/items/new"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-logique-yellow text-slate-950 text-xs font-bold hover:bg-logique-hover transition shadow-md hover:shadow-logique-yellow/20"
             >
-              <PlusCircle className="w-4 h-4" />
+              <PlusCircleIcon size={16} weight="bold" />
               <span>Tambah Item</span>
             </Link>
           </div>

@@ -14,7 +14,10 @@ export default {
           card: '#162238',
           border: 'rgba(51, 65, 85, 0.6)',
         }
-      }
+      },
+      fontFamily: {
+        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+      },
     },
   },
   plugins: [],
